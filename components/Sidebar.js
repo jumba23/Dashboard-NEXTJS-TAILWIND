@@ -6,13 +6,14 @@ const Sidebar = () => {
   const navCategories = {
     EXPLORE: ["Stocks", "Forex", "Crypto"],
     FEEDBACK: ["Contact", "Reviews"],
-    ABOUT: ["Out Story"],
+    ABOUT: ["Mission"],
   };
 
   const categories = Object.keys(navCategories);
 
   return (
-    <nav className="hidden w-2/12 h-screen p-4 text-left bg-darkBlue md:flex md:flex-col">
+    // Nav Categories
+    <nav className="hidden w-1/6 h-screen text-left pl-7 bg-darkBlue md:flex md:flex-col">
       {categories.map((category) => (
         <div key={category}>
           <NavCategoryTitle title={category} />

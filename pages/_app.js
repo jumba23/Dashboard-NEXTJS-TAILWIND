@@ -4,10 +4,10 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="flex flex-1 w-screen h-screen">
-      <Sidebar />
-      <div className="flex flex-col w-full">
-        <Header />
+    <div className="flex flex-col flex-1 w-screen h-screen">
+      <Header />
+      <div className="flex w-full">
+        <Sidebar />
         <Component {...pageProps} />
       </div>
     </div>

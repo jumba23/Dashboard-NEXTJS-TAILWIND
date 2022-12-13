@@ -18,6 +18,7 @@ module.exports = {
         lightBabyBlue: "#30D9CB",
         reallyLightBabyBlue: "#9DF5ED",
         darkBlue: "#003366",
+        corflowerBlue: "#6495ED",
       },
     },
   },

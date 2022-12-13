@@ -1,7 +1,7 @@
 import React from "react";
 
 const Stocks = () => {
-  return <div>stocks</div>;
+  return <div>Stocks</div>;
 };
 
 export default Stocks;

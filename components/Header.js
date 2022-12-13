@@ -4,7 +4,7 @@ import logo from "../img/orion.png";
 
 const Header = () => {
   return (
-    <header className="relative p-6 shadow-black bg-babyBlue">
+    <header className="relative px-20 py-6 shadow-black bg-babyBlue">
       {/* Flex container */}
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -15,7 +15,7 @@ const Header = () => {
         {/* Button */}
         <a
           href="#"
-          className="hidden p-3 px-6 pt-2 rounded-full shadow-lg text-lightBabyBlue bg-darkBlue baseline hover:bg-babyBlue hover:text-darkBlue md:block"
+          className="hidden p-3 px-6 pt-2 rounded-full shadow-lg text-lightBabyBlue bg-darkBlue baseline hover:bg-corflowerBlue hover:text-darkBlue hover:font-bold md:block"
         >
           Sign Up
         </a>

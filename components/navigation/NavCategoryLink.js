@@ -1,15 +1,18 @@
+import Link from "next/link";
 import React from "react";
 
 const NavCategoryLink = ({ links }) => {
-  console.log(links);
   return (
-    <>
+    // Nav Links
+    <ul className="pl-6">
       {links.map((link) => (
-        <div key={link}>
-          <h2 className="text-2xl font-normal text-white">{link}</h2>
-        </div>
+        <li key={link}>
+          <Link href={`/${link}`} className="text-2xl font-normal text-white">
+            {link}
+          </Link>
+        </li>
       ))}
-    </>
+    </ul>
   );
 };
 
