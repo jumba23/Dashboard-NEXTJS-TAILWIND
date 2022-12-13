@@ -6,7 +6,20 @@ module.exports = {
   ],
 
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        sm: "480px",
+        md: "768px",
+        lg: "976px",
+        xl: "1440px",
+      },
+      colors: {
+        babyBlue: "#01B8AA",
+        lightBabyBlue: "#30D9CB",
+        reallyLightBabyBlue: "#9DF5ED",
+        darkBlue: "#003366",
+      },
+    },
   },
   plugins: [],
 };
