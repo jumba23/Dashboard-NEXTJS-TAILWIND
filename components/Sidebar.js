@@ -1,18 +1,24 @@
 import React from "react";
 import NavCategoryTitle from "./navigation/NavCategoryTitle";
+import NavCategoryLink from "./navigation/NavCategoryLink";
 
 const Sidebar = () => {
+  const navCategories = {
+    EXPLORE: ["Stocks", "Forex", "Crypto"],
+    FEEDBACK: ["Contact", "Reviews"],
+    ABOUT: ["Out Story"],
+  };
+
+  const categories = Object.keys(navCategories);
+
   return (
     <nav className="hidden w-2/12 h-screen p-4 text-left bg-darkBlue md:flex md:flex-col">
-      <div>
-        <NavCategoryTitle title={"Explore"} />
-      </div>
-      <div>
-        <NavCategoryTitle title={"Feedback"} />
-      </div>
-      <div>
-        <NavCategoryTitle title={"About US"} />
-      </div>
+      {categories.map((category) => (
+        <div key={category}>
+          <NavCategoryTitle title={category} />
+          <NavCategoryLink links={navCategories[category]} />
+        </div>
+      ))}
     </nav>
   );
 };
