@@ -1,18 +1,20 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../img/orion.png";
+import logo from "../public/orion.png";
 
 const Header = () => {
   return (
-    <header className="relative px-20 py-6 shadow-black bg-babyBlue">
-      {/* Flex container */}
-      <div className="flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex content-center pt-3">
-          <Image src={logo} className="w-12" alt="" />
-          <h1 className="pl-3 text-4xl text-darkBlue">ORION</h1>
-        </div>
-        {/* Button */}
+    // {/* Flex container */}
+    <div className="flex items-center px-20 border-b-4 border-blue-700 shadow-inner h-1/6 bg-gradient-to-r from-blue-900 to-blue-400">
+      {/* Logo */}
+      <div className="flex">
+        <Image src={logo} className="w-16" alt="" />
+        <p className="pl-10 text-5xl italic font-extrabold tracking-widest text-transparent border-indigo-500/50 bg-clip-text bg-gradient-to-r to-black from-lightBabyBlue">
+          OR<span className="text-black">I</span>ON
+        </p>
+      </div>
+      {/* Button */}
+      <div className="flex ml-auto">
         <a
           href="#"
           className="hidden p-3 px-6 pt-2 rounded-full shadow-lg text-lightBabyBlue bg-darkBlue baseline hover:bg-corflowerBlue hover:text-darkBlue hover:font-bold md:block"
@@ -20,7 +22,7 @@ const Header = () => {
           Sign Up
         </a>
       </div>
-    </header>
+    </div>
   );
 };
 

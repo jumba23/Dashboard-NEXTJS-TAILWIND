@@ -4,7 +4,7 @@ import React from "react";
 const NavCategoryLink = ({ links }) => {
   return (
     // Nav Links
-    <ul className="pl-6">
+    <ul>
       {links.map((link) => (
         <li key={link}>
           <Link href={`/${link}`} className="text-2xl font-normal text-white">

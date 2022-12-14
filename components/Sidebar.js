@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   return (
     // Nav Categories
-    <nav className="hidden w-1/6 h-screen text-left pl-7 bg-darkBlue md:flex md:flex-col">
+    <nav className="hidden w-1/6 h-full pl-16 text-left items-left bg-darkBlue md:flex md:flex-col">
       {categories.map((category) => (
         <div key={category}>
           <NavCategoryTitle title={category} />
