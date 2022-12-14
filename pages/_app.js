@@ -1,6 +1,7 @@
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import "../styles/globals.css";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -15,22 +16,7 @@ function MyApp({ Component, pageProps }) {
             </p>
             <Component {...pageProps} />
           </div>
-          <div className="flex h-1/3">
-            <div className="w-2/3 ">
-              <div className="flex h-full">
-                <div className="flex w-full m-5 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer">
-                  Latest News
-                </div>
-              </div>
-            </div>
-            <div className="w-1/3 ">
-              <div className="flex h-full">
-                <div className="flex w-full m-5 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer">
-                  Weather
-                </div>
-              </div>
-            </div>
-          </div>
+          <Footer />
         </main>
       </div>
     </div>
