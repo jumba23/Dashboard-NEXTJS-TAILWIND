@@ -8,7 +8,15 @@ function MyApp({ Component, pageProps }) {
       <Header />
       <div className="flex w-full h-full">
         <Sidebar />
-        <Component {...pageProps} />
+        <main className="w-full bg-blue-500">
+          <div className="h-1/2">
+            <Component {...pageProps} />
+          </div>
+          <div className="flex h-1/2">
+            <div className="w-1/2 border-2">News</div>
+            <div className="w-1/2 border-2">Weather</div>
+          </div>
+        </main>
       </div>
     </div>
   );
