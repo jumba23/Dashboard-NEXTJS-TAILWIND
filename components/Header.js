@@ -5,7 +5,7 @@ import logo from "../public/orion.png";
 const Header = () => {
   return (
     // {/* Flex container */}
-    <div className="flex items-center px-20 border-b-4 border-blue-700 shadow-inner h-1/6 bg-gradient-to-r from-blue-900 to-blue-400">
+    <div className="flex items-center px-20 border-b-4 border-blue-700 h-1/6 bg-gradient-to-r from-blue-900 to-blue-400">
       {/* Logo */}
       <div className="flex">
         <Image src={logo} className="w-16" alt="" />
@@ -17,7 +17,7 @@ const Header = () => {
       <div className="flex ml-auto">
         <a
           href="#"
-          className="hidden p-3 px-6 pt-2 rounded-full shadow-lg text-lightBabyBlue bg-darkBlue baseline hover:bg-corflowerBlue hover:text-darkBlue hover:font-bold md:block"
+          className="hidden p-3 px-6 pt-2 rounded-full shadow-lg text-lightBabyBlue bg-darkBlue baseline hover:bg-corflowerBlue hover:text-darkBlue hover:font-bold hover:border-darkBlue hover:border-2 md:block"
         >
           Sign Up
         </a>

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Stocks from "./Stocks";
 
 export default function Home() {
   return (
@@ -9,13 +10,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <title>Orion App</title>
       </Head>
-      {/* <main className="w-full bg-blue-500">
-        <div className="h-1/2">Most Popular Stocks/Forex/Crypto</div>
-        <div className="flex h-1/2">
-          <div className="w-1/2 border-2">News</div>
-          <div className="w-1/2 border-2">Weather</div>
+      <main className="w-full bg-blue-500">
+        <div className="h-1/2">
+          <Stocks />
         </div>
-      </main> */}
+      </main>
     </>
   );
 }
