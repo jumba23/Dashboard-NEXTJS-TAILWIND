@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Stocks from "./Explore/Stocks";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,17 +13,25 @@ export default function Home() {
       <main className="w-full h-full bg-blue-500">
         <div className="flex flex-col h-full">
           <div className="flex h-full">
-            <div className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+            <Link
+              href="/Explore/Stocks"
+              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
+            >
               Stocks
-            </div>
-            <div className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+            </Link>
+            <Link
+              href="/Explore/Forex"
+              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
+            >
               Forex
-            </div>
-            <div className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
-              {" "}
+            </Link>
+            <Link
+              href="/Explore/Crypto"
+              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
+            >
               Crypto
-            </div>
-          </div>{" "}
+            </Link>
+          </div>
         </div>
       </main>
     </>
