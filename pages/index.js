@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function Home() {
+  const exploreCategories = ["Stocks", "Forex", "Crypto"];
   return (
     <>
       <Head>
@@ -13,24 +14,14 @@ export default function Home() {
       <main className="w-full h-full bg-blue-500">
         <div className="flex flex-col h-full">
           <div className="flex h-full">
-            <Link
-              href="/Explore/Stocks"
-              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
-            >
-              Stocks
-            </Link>
-            <Link
-              href="/Explore/Forex"
-              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
-            >
-              Forex
-            </Link>
-            <Link
-              href="/Explore/Crypto"
-              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
-            >
-              Crypto
-            </Link>
+            {exploreCategories.map((category) => (
+              <Link
+                href={`/Explore/${category}`}
+                className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
+              >
+                {category}
+              </Link>
+            ))}
           </div>
         </div>
       </main>
