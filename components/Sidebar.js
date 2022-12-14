@@ -4,9 +4,9 @@ import NavCategoryLink from "./navigation/NavCategoryLink";
 
 const Sidebar = () => {
   const navCategories = {
-    EXPLORE: ["Stocks", "Forex", "Crypto"],
-    FEEDBACK: ["Contact", "Reviews"],
-    ABOUT: ["Mission"],
+    Explore: ["Stocks", "Forex", "Crypto"],
+    Feedback: ["Contact", "Reviews"],
+    About: ["Mission"],
   };
 
   const categories = Object.keys(navCategories);
@@ -17,7 +17,10 @@ const Sidebar = () => {
       {categories.map((category) => (
         <div key={category}>
           <NavCategoryTitle title={category} />
-          <NavCategoryLink links={navCategories[category]} />
+          <NavCategoryLink
+            category={category}
+            links={navCategories[category]}
+          />
         </div>
       ))}
     </nav>

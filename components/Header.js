@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import logo from "../public/orion.png";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -10,7 +11,9 @@ const Header = () => {
       <div className="flex">
         <Image src={logo} className="w-16" alt="" />
         <p className="pl-10 text-5xl italic font-extrabold tracking-widest text-transparent border-indigo-500/50 bg-clip-text bg-gradient-to-r to-black from-lightBabyBlue">
-          OR<span className="text-black">I</span>ON
+          <Link href="/">
+            OR<span className="text-black">I</span>ON
+          </Link>
         </p>
       </div>
       {/* Button */}

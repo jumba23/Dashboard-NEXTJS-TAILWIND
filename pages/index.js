@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Stocks from "./Stocks";
+import Stocks from "./Explore/Stocks";
 
 export default function Home() {
   return (
@@ -10,9 +10,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <title>Orion App</title>
       </Head>
-      <main className="w-full bg-blue-500">
-        <div className="h-1/2">
-          <Stocks />
+      <main className="w-full h-full bg-blue-500">
+        <div className="flex flex-col h-full">
+          <div className="flex h-full">
+            <div className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+              Stocks
+            </div>
+            <div className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+              Forex
+            </div>
+            <div className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+              {" "}
+              Crypto
+            </div>
+          </div>{" "}
         </div>
       </main>
     </>
