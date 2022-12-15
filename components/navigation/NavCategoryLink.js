@@ -11,11 +11,7 @@ const NavCategoryLink = ({ category, links }) => {
     <ul>
       {links.map((link) => (
         <li key={link}>
-          <Link
-            legacyBehavior
-            href={`/${category}/${link}`}
-            // className="text-2xl font-normal text-white hover:text-babyBlue hover:underline hover:underline-offset-1 "
-          >
+          <Link legacyBehavior href={`/${category}/${link}`}>
             <a
               className={`text-xl font-normal text-lightBabyBlue hover:text-babyBlue ${
                 currentRoute === `/${category}/${link}`
