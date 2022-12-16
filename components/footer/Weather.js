@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
+// export const getStaticProps = async () => {
+//   const [lat, setLat] = useState(undefined);
+//   const [lon, setLon] = useState(undefined);
+//   const [weatherData, setWeatherData] = useState(undefined);
+
+//   useEffect(() => {
+//     navigator.geolocation.getCurrentPosition((position) => {
+//       setLat(position.coords.latitude);
+//       setLon(position.coords.longitude);
+//     });
+//   }, []);
+
+//   useEffect(() => {
+//     getWeatherData();
+//   }, [lat, lon]);
+
+//   const res = await fetch(
+//     "`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=00da260d1aabb2d7530e8dce69d277a9`"
+//   );
+// };
+
 const Weather = () => {
   const [lat, setLat] = useState(undefined);
   const [lon, setLon] = useState(undefined);
@@ -25,7 +46,6 @@ const Weather = () => {
     const data = await response.json();
     setWeatherData(data);
   };
-  console.log(weatherData);
 
   return (
     <div className="w-1/3 ">
