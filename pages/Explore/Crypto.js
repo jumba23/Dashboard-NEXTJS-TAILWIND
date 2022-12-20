@@ -7,7 +7,7 @@ const Crypto = () => {
   // const [crypto, setCrypto] = useState();
   const router = useRouter();
 
-  const categories = new Object(3).fill(router.route.split("/")[2]);
+  const categories = new Array(3).fill(router.route.split("/")[2]);
   //========================== FOREX API FETCH =================================================
 
   // useEffect(() => {
@@ -67,8 +67,9 @@ const Crypto = () => {
       {
         name: "Current Stock Name",
         data: [
-          1.06094, 1.0588, 1.0625, 1.06812, 1.06317, 1.05355, 1.05281, 1.05542,
-          1.05048, 1.0466, 1.04902, 1.053, 1.05258,
+          16438.88, 16739, 16777.54, 16631.5, 17356.96, 17804.01, 17775.82,
+          17208.93, 17085.05, 17127.49, 17128.56, 17224.1, 16836.64, 17088.96,
+          16966.35, 17106.65, 16885.2, 17092.13, 16978, 17165.53, 16442.91,
         ],
         type: "areaspline",
         threshold: null,

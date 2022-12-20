@@ -107,12 +107,12 @@ const Forex = () => {
       spacingRight: 10,
       // Explicitly tell the width and height of a chart
       // OTHER OFFICE
-      // width: 350,
-      // height: 335,
+      width: 350,
+      height: 335,
 
       // DOWNTOWN OFFICE
-      width: 450,
-      height: 450,
+      // width: 450,
+      // height: 450,
     },
     // removes Highcharts.com
     credits: {
