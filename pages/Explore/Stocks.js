@@ -4,7 +4,7 @@ import Highcharts from "highcharts/highstock";
 import { useRouter } from "next/router";
 
 const Stocks = () => {
-  const [stocks, setStocks] = useState();
+  // const [stocks, setStocks] = useState();
   const router = useRouter();
   const categories = new Array(3).fill(router.route.split("/")[2]);
 
@@ -27,12 +27,18 @@ const Stocks = () => {
         "5pm",
         "6pm",
       ],
+      crosshair: {
+        width: 2,
+        color: "gray",
+        dashStyle: "shortdot",
+      },
       tickInterval: 3, // sets xAxis data points
     },
     yAxis: {
       // tickInterval: 5,
       labels: {
-        format: "${text}", // The $ is literally a dollar unit
+        enabled: false,
+        //   format: "${text}", // The $ is literally a dollar unit
       },
       gridLineWidth: 0, // Remove background line charts
       title: {
@@ -56,25 +62,35 @@ const Stocks = () => {
             },
           },
         },
-        fillColor: {
-          linearGradient: {
-            x1: 0,
-            y1: 0,
-            x2: 0,
-            y2: 1,
-          },
-          stops: [
-            [0, Highcharts.getOptions().colors[0]],
-            [
-              1,
-              Highcharts.color(Highcharts.getOptions().colors[0])
-                .setOpacity(0)
-                .get("rgba"),
-            ],
-          ],
-        },
+        //     fillColor: {
+        //       linearGradient: {
+        //         x1: 0,
+        //         y1: 0,
+        //         x2: 0,
+        //         y2: 1,
+        //       },
+        //       stops: [
+        //         [0, Highcharts.getOptions().colors[0]],
+        //         [
+        //           1,
+        //           Highcharts.color(Highcharts.getOptions().colors[0])
+        //             .setOpacity(0)
+        //             .get("rgba"),
+        //         ],
+        //       ],
+        //     },
       },
     ],
+    chart: {
+      // Edit chart spacing
+      spacingBottom: 15,
+      spacingTop: 10,
+      spacingLeft: 10,
+      spacingRight: 10,
+      // Explicitly tell the width and height of a chart
+      width: 350,
+      height: 335,
+    },
     // removes Highcharts.com
     credits: {
       enabled: false,
@@ -87,7 +103,7 @@ const Stocks = () => {
 
   // ======================================================
 
-  // ================ API FETCH ==================================
+  // ================ STOCKS API FETCH ==================================
 
   // useEffect(() => {
   //   getStocks();

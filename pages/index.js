@@ -1,6 +1,6 @@
 import React from "react";
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts/highstock";
+import Highcharts from "highcharts";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -27,12 +27,18 @@ export default function Home() {
         "5pm",
         "6pm",
       ],
+      crosshair: {
+        width: 2,
+        color: "gray",
+        dashStyle: "shortdot",
+      },
       tickInterval: 3, // sets xAxis data points
     },
     yAxis: {
       // tickInterval: 5,
       labels: {
-        format: "${text}", // The $ is literally a dollar unit
+        enabled: false,
+        //   format: "${text}", // The $ is literally a dollar unit
       },
       gridLineWidth: 0, // Remove background line charts
       title: {
@@ -56,23 +62,23 @@ export default function Home() {
             },
           },
         },
-        fillColor: {
-          linearGradient: {
-            x1: 0,
-            y1: 0,
-            x2: 0,
-            y2: 1,
-          },
-          stops: [
-            [0, Highcharts.getOptions().colors[0]],
-            [
-              1,
-              Highcharts.color(Highcharts.getOptions().colors[0])
-                .setOpacity(0)
-                .get("rgba"),
-            ],
-          ],
-        },
+        //     fillColor: {
+        //       linearGradient: {
+        //         x1: 0,
+        //         y1: 0,
+        //         x2: 0,
+        //         y2: 1,
+        //       },
+        //       stops: [
+        //         [0, Highcharts.getOptions().colors[0]],
+        //         [
+        //           1,
+        //           Highcharts.color(Highcharts.getOptions().colors[0])
+        //             .setOpacity(0)
+        //             .get("rgba"),
+        //         ],
+        //       ],
+        //     },
       },
     ],
     chart: {
