@@ -10,6 +10,10 @@ export default function Home() {
   // ================================= HIGHCHART =========================
 
   const options = {
+    title: {
+      text: category,
+    },
+
     xAxis: {
       // max: 12,
       categories: [
