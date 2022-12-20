@@ -82,8 +82,8 @@ export default function Home() {
       spacingLeft: 10,
       spacingRight: 10,
       // Explicitly tell the width and height of a chart
-      width: 13,
-      height: 13,
+      width: 350,
+      height: 335,
     },
     // removes Highcharts.com
     credits: {
@@ -112,11 +112,7 @@ export default function Home() {
               href={`/Explore/${category}`}
               className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
             >
-              <HighchartsReact
-                className="flex w-1/3 border-red-500"
-                highcharts={Highcharts}
-                options={options}
-              />
+              <HighchartsReact highcharts={Highcharts} options={options} />
             </Link>
           ))}
         </div>
