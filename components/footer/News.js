@@ -16,17 +16,24 @@ const News = () => {
   };
 
   return (
-    <div className="w-2/3 ">
+    <div className="w-2/3">
       <div className="flex h-full">
         <div className="flex w-full m-5 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer">
-          <ul>
+          <div>
             {news?.map((item) => (
-              <li key={item.uuid}>
-                <p className="font-extrabold">{item.title}</p>
-                <p className="pb-3 underline">{item.url}</p>
-              </li>
+              <div key={item.uuid} className="flex h-1/3">
+                <a
+                  href={item.url}
+                  className="flex flex-col items-center justify-center text-sm font-extrabold underline"
+                >
+                  {item.title}
+                </a>
+                {/* <a href={item.url} className="pb-3 text-sm underline">
+                  read more ...
+                </a> */}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>
