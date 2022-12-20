@@ -4,7 +4,7 @@ import Highcharts from "highcharts/highstock";
 import { useRouter } from "next/router";
 
 const Forex = () => {
-  const [forex, setForex] = useState();
+  // const [forex, setForex] = useState();
   const router = useRouter();
   const categories = new Array(3).fill(router.route.split("/")[2]);
 
@@ -25,6 +25,9 @@ const Forex = () => {
 
   // ================== HIGHCHART OPTIONS ===================
   const options = {
+    title: {
+      text: "forex",
+    },
     xAxis: {
       // max: 12,
       categories: [
@@ -103,8 +106,13 @@ const Forex = () => {
       spacingLeft: 10,
       spacingRight: 10,
       // Explicitly tell the width and height of a chart
-      width: 350,
-      height: 335,
+      // OTHER OFFICE
+      // width: 350,
+      // height: 335,
+
+      // DOWNTOWN OFFICE
+      width: 450,
+      height: 450,
     },
     // removes Highcharts.com
     credits: {
