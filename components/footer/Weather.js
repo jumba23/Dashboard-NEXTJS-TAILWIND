@@ -27,12 +27,12 @@ const Weather = () => {
   const [lon, setLon] = useState(undefined);
   const [weatherData, setWeatherData] = useState(undefined);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLon(position.coords.longitude);
-    });
-  }, []);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition((position) => {
+  //     setLat(position.coords.latitude);
+  //     setLon(position.coords.longitude);
+  //   });
+  // }, []);
 
   useEffect(() => {
     getWeatherData();
@@ -51,7 +51,7 @@ const Weather = () => {
     <div className="w-1/3 ">
       <div className="flex h-full">
         <div className="flex justify-around w-full m-5 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer">
-          {weatherData && (
+          {/* {weatherData && (
             <>
               <div className="flex flex-col items-center justify-center">
                 <p>{weatherData.name}</p>
@@ -67,7 +67,8 @@ const Weather = () => {
                 />
               </div>
             </>
-          )}
+          )} */}
+          Weather goes here
         </div>
       </div>
     </div>

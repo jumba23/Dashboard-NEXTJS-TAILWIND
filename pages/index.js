@@ -86,18 +86,7 @@ export default function Home() {
       },
     ],
     chart: {
-      // Edit chart spacing
-      // spacingBottom: 15,
-      // spacingTop: 10,
-      // spacingLeft: 10,
-      // spacingRight: 10,
-      // Explicitly tell the width and height of a chart
-      // OTHER OFFICE
-      // width: "100%",
-      height: "100%",
-      // DOWNTOWN OFFICE
-      // width: 450,
-      // height: 450,
+      height: "105%",
     },
     // removes Highcharts.com
     credits: {
