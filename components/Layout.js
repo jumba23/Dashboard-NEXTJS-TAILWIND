@@ -1,18 +1,17 @@
 import React from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import Footer from "./Footer";
+import NestedLayout from "./NestedLayout";
 
 const Layout = ({ children }) => {
+  // console.log(children.type.name);
+  // const currentPage = children.type.name;
   return (
     <div className="flex flex-col flex-1 w-screen h-screen">
       <Header />
       <div className="flex w-full h-full">
         <Sidebar />
-        <main className="w-full pt-4 bg-blue-500">
-          <div className="flex flex-col h-2/3">{children}</div>
-          <Footer />
-        </main>
+        <NestedLayout children={children} />
       </div>
     </div>
   );

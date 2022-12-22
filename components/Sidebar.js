@@ -4,7 +4,7 @@ import NavCategoryLink from "./navigation/NavCategoryLink";
 
 const Sidebar = () => {
   const navCategories = {
-    Explore: ["Stocks", "Forex", "Crypto"],
+    Explore: ["Stocks", "Forex", "Crypto", "News"],
     Feedback: ["Contact", "Reviews"],
     About: ["Mission"],
   };
