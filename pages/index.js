@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { getApiData } from "../components/services/indexPageApi";
@@ -6,9 +6,15 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function Home() {
+  const [stockData, setStockData] = useState({});
   useEffect(() => {
-    getApiData();
+    apiCall();
   }, []);
+
+  const apiCall = async () => {
+    const res = await getApiData();
+    setStockData(res);
+  };
 
   // const exploreCategories = ["Stocks", "Forex", "Crypto"];
 
@@ -16,7 +22,7 @@ export default function Home() {
 
   const options1 = {
     title: {
-      text: `Stocks (IBM)`,
+      text: `Stocks (${stockData.stockName})`,
     },
     xAxis: {
       // max: 12,
@@ -56,10 +62,7 @@ export default function Home() {
     series: [
       {
         name: "Stocks",
-        data: [
-          140.06, 139.99, 139.8811, 139.88, 140.16, 140.07, 139.94, 139.31,
-          139.21, 139.135, 139.04, 139.22, 139.31,
-        ],
+        data: stockData.yArray,
         type: "areaspline",
         threshold: null,
         marker: {
