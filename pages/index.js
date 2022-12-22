@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function Home() {
   const [stockData, setStockData] = useState({});
   const [forexData, setForexData] = useState({});
+  // const [cryptoData, setCryptoData] = useState({});
   useEffect(() => {
     apiCall();
   }, []);
@@ -17,11 +18,14 @@ export default function Home() {
     console.log(res);
     setForexData(res["finalForexData"]);
     setStockData(res["finalStockData"]);
+    // setCryptoData(res["finalCryptoData"]);
   };
 
   console.log(stockData);
   console.log(forexData);
+  // console.log(cryptoData);
 
+  // console.log(typeof forexData != "undefined");
   // const exploreCategories = ["Stocks", "Forex", "Crypto"];
 
   // ================================= HIGHCHART -STOCKS =========================
@@ -113,9 +117,9 @@ export default function Home() {
   // ================================= HIGHCHART - FOREX =========================
 
   const options2 = {
-    title: {
-      text: `${forexData.currencies.one} to ${forexData.currencies.two}`,
-    },
+    // title: {
+    //   text: `${forexData.currencies.one} to ${forexData.currencies.two}`,
+    // },
     xAxis: {
       // max: 12,
       categories: [
@@ -182,9 +186,9 @@ export default function Home() {
   // ================================= HIGHCHART - CRYPTO =========================
 
   const options3 = {
-    title: {
-      text: "Crypto",
-    },
+    // title: {
+    //   text: cryptoData.cryptoName,
+    // },
     xAxis: {
       // max: 12,
       categories: [
@@ -222,11 +226,7 @@ export default function Home() {
     },
     series: [
       {
-        name: "Stocks",
-        data: [
-          140.06, 139.99, 139.8811, 139.88, 140.16, 140.07, 139.94, 139.31,
-          139.21, 139.135, 139.04, 139.22, 139.31,
-        ],
+        // data: cryptoData.yArray,
         type: "areaspline",
         threshold: null,
         marker: {
@@ -264,31 +264,35 @@ export default function Home() {
       </Head>
       <main className="w-full h-full bg-blue-500">
         <div className="flex h-full">
-          {/* {exploreCategories.map((category) => ( */}
-          {/* ))} */}
           <Link
             href={`/Explore/Stocks`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
-            <div className="w-full h-full">
-              <HighchartsReact highcharts={Highcharts} options={options1} />
-            </div>
+            {stockData && (
+              <div className="w-full h-full">
+                <HighchartsReact highcharts={Highcharts} options={options1} />
+              </div>
+            )}
           </Link>
           <Link
             href={`/Explore/Forex`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
-            <div className="w-full h-full">
-              <HighchartsReact highcharts={Highcharts} options={options2} />
-            </div>
+            {forexData && (
+              <div className="w-full h-full">
+                <HighchartsReact highcharts={Highcharts} options={options2} />
+              </div>
+            )}
           </Link>
           <Link
             href={`/Explore/Crypto`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
+            {/* {cryptoData && ( */}
             <div className="w-full h-full">
               <HighchartsReact highcharts={Highcharts} options={options3} />
             </div>
+            {/* )} */}
           </Link>
         </div>
       </main>

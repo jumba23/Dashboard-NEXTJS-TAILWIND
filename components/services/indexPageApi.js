@@ -12,16 +12,14 @@ const getApiData = async () => {
   const resForex = await fetch(`${baseURL}${forex}`);
   const rawForexData = await resForex.json();
   //   const resCrypto = await fetch(`${baseURL}${crypto}`);
-  //   const cryptoData = await resCrypto.json();
-  //   console.log(stockData);
-  console.log(rawForexData);
+  //   const rawCryptoData = await resCrypto.json();
   const finalStockData = filterStockIntraDay(rawStockData);
   const finalForexData = filterForexDaily(rawForexData);
-  //   const finalStockData = filterStockIntraDay(rawStockData);
+  //   console.log(rawCryptoData);
+  //   const finalCryptoData = filterCryptoDaily(rawCryptoData);
 
-  //   console.log(finalStockData);
-  //   console.log(cryptoData);
-  //   return finalForexData;
+  //   console.log(finalCryptoData);
+
   return { finalStockData, finalForexData };
 };
 
@@ -76,6 +74,7 @@ const filterForexDaily = (data) => {
   // get currency names
   const currencyOne = data["Meta Data"]["2. From Symbol"];
   const currencyTwo = data["Meta Data"]["3. To Symbol"];
+  const currencies = { one: currencyOne, two: currencyTwo };
 
   // create an array from object entry (values)
   const allValues = Object.values(data["Time Series FX (Daily)"]);
@@ -91,8 +90,28 @@ const filterForexDaily = (data) => {
     yArray.push(e);
   });
 
-  const currencies = { one: currencyOne, two: currencyTwo };
   return { currencies, yArray };
 };
+
+// const filterCryptoDaily = (data) => {
+//   // get crypto name
+//   const cryptoName = data["Meta Data"]["3. Digital Currency Name"];
+
+//   // create an array from object entry (values)
+//   const allValues = Object.values(data["Time Series (Digital Currency Daily)"]);
+
+//   // create a new array with the length using the step above (how many data points for most recent day)
+//   const onlyMostRecentValues = allValues.slice(0, 14);
+
+//   // get the final array
+//   const yArray = [];
+//   onlyMostRecentValues.map((e) => {
+//     // convert string data point into a number with parse method
+//     e = parseFloat(e["1a. open (CNY)"]);
+//     yArray.push(e);
+//   });
+
+//   return { cryptoName, yArray };
+// };
 
 export { getApiData };
