@@ -7,14 +7,20 @@ import Link from "next/link";
 
 export default function Home() {
   const [stockData, setStockData] = useState({});
+  const [forexData, setForexData] = useState({});
   useEffect(() => {
     apiCall();
   }, []);
 
   const apiCall = async () => {
     const res = await getApiData();
-    setStockData(res);
+    console.log(res);
+    setForexData(res["finalForexData"]);
+    setStockData(res["finalStockData"]);
   };
+
+  console.log(stockData);
+  console.log(forexData);
 
   // const exploreCategories = ["Stocks", "Forex", "Crypto"];
 
@@ -108,7 +114,7 @@ export default function Home() {
 
   const options2 = {
     title: {
-      text: "Forex",
+      text: `${forexData.currencies.one} to ${forexData.currencies.two}`,
     },
     xAxis: {
       // max: 12,
@@ -148,10 +154,7 @@ export default function Home() {
     series: [
       {
         name: "Stocks",
-        data: [
-          140.06, 139.99, 139.8811, 139.88, 140.16, 140.07, 139.94, 139.31,
-          139.21, 139.135, 139.04, 139.22, 139.31,
-        ],
+        data: forexData.yArray,
         type: "areaspline",
         threshold: null,
         marker: {

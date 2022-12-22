@@ -1,7 +1,7 @@
 const baseURL = "https://www.alphavantage.co/query?function=";
 const NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
 const stock = `TIME_SERIES_INTRADAY&symbol=IBM&interval=30min&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
-// const forex = `FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
+const forex = `FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=compact&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
 // const crypto = `DIGITAL_CURRENCY_DAILY&symbol=BTC&market=CNY&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
 
 // ============================= FETCH APIs =================================================
@@ -9,17 +9,20 @@ const stock = `TIME_SERIES_INTRADAY&symbol=IBM&interval=30min&apikey=${NEXT_PUBL
 const getApiData = async () => {
   const resStock = await fetch(`${baseURL}${stock}`);
   const rawStockData = await resStock.json();
-  //   const resForex = await fetch(`${baseURL}${forex}`);
-  //   const forexData = await resForex.json();
+  const resForex = await fetch(`${baseURL}${forex}`);
+  const rawForexData = await resForex.json();
   //   const resCrypto = await fetch(`${baseURL}${crypto}`);
   //   const cryptoData = await resCrypto.json();
   //   console.log(stockData);
+  console.log(rawForexData);
   const finalStockData = filterStockIntraDay(rawStockData);
+  const finalForexData = filterForexDaily(rawForexData);
+  //   const finalStockData = filterStockIntraDay(rawStockData);
 
   //   console.log(finalStockData);
-  //   console.log(forexData);
   //   console.log(cryptoData);
-  return finalStockData;
+  //   return finalForexData;
+  return { finalStockData, finalForexData };
 };
 
 // ============================= FILTER API DATA =================================================
@@ -67,6 +70,29 @@ const filterStockIntraDay = (data) => {
   });
 
   return { stockName, yArray };
+};
+
+const filterForexDaily = (data) => {
+  // get currency names
+  const currencyOne = data["Meta Data"]["2. From Symbol"];
+  const currencyTwo = data["Meta Data"]["3. To Symbol"];
+
+  // create an array from object entry (values)
+  const allValues = Object.values(data["Time Series FX (Daily)"]);
+
+  // create a new array with the length using the step above (how many data points for most recent day)
+  const onlyMostRecentValues = allValues.slice(0, 14);
+
+  // get the final array
+  const yArray = [];
+  onlyMostRecentValues.map((e) => {
+    // convert string data point into a number with parse method
+    e = parseFloat(e["1. open"]);
+    yArray.push(e);
+  });
+
+  const currencies = { one: currencyOne, two: currencyTwo };
+  return { currencies, yArray };
 };
 
 export { getApiData };
