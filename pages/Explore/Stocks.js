@@ -86,10 +86,10 @@ const Stocks = () => {
     ],
     chart: {
       // Edit chart spacing
-      spacingBottom: 15,
-      spacingTop: 10,
-      spacingLeft: 10,
-      spacingRight: 10,
+      // spacingBottom: 15,
+      // spacingTop: 10,
+      // spacingLeft: 10,
+      // spacingRight: 10,
       // Explicitly tell the width and height of a chart
 
       // OTHER OFFICE

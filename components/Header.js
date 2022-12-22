@@ -19,10 +19,10 @@ const Header = () => {
       {/* Button */}
       <div className="flex ml-auto">
         <a
-          href="#"
+          href="/Login"
           className="hidden p-3 px-6 pt-2 rounded-full shadow-lg text-lightBabyBlue bg-darkBlue baseline hover:bg-corflowerBlue hover:text-darkBlue hover:font-bold hover:border-darkBlue hover:border-2 md:block"
         >
-          Sign Up
+          Login
         </a>
       </div>
     </div>

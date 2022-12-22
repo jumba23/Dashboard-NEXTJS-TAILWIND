@@ -9,13 +9,8 @@ const Layout = ({ children }) => {
       <Header />
       <div className="flex w-full h-full">
         <Sidebar />
-        <main className="w-full bg-blue-500">
-          <div className="flex flex-col h-2/3">
-            <p className="z-20 flex items-center h-6 pt-1 mx-auto text-xl font-extrabold">
-              Most Popular
-            </p>
-            {children}
-          </div>
+        <main className="w-full pt-4 bg-blue-500">
+          <div className="flex flex-col h-2/3">{children}</div>
           <Footer />
         </main>
       </div>

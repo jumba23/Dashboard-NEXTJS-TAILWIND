@@ -87,15 +87,14 @@ export default function Home() {
     ],
     chart: {
       // Edit chart spacing
-      spacingBottom: 15,
-      spacingTop: 10,
-      spacingLeft: 10,
-      spacingRight: 10,
+      // spacingBottom: 15,
+      // spacingTop: 10,
+      // spacingLeft: 10,
+      // spacingRight: 10,
       // Explicitly tell the width and height of a chart
       // OTHER OFFICE
-      width: 350,
-      height: 335,
-
+      // width: "100%",
+      height: "100%",
       // DOWNTOWN OFFICE
       // width: 450,
       // height: 450,
@@ -125,9 +124,11 @@ export default function Home() {
           {exploreCategories.map((category) => (
             <Link
               href={`/Explore/${category}`}
-              className="flex w-1/3 m-5 transition duration-500 transform shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
+              className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
             >
-              <HighchartsReact highcharts={Highcharts} options={options} />
+              <div className="w-full h-full">
+                <HighchartsReact highcharts={Highcharts} options={options} />
+              </div>
             </Link>
           ))}
         </div>
