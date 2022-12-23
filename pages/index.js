@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
+import Highcharts from "highcharts/highstock";
 import { getApiData } from "../components/services/indexPageApi";
 import Head from "next/head";
 // import Link from "next/link";
@@ -33,7 +33,7 @@ export default function Home() {
 
   // ================================= HIGHCHART -STOCKS =========================
 
-  const options1 = {
+  const optionsStock = {
     title: {
       text: `Stocks (${stockData.stockName})`,
     },
@@ -74,7 +74,6 @@ export default function Home() {
     },
     series: [
       {
-        name: "Stocks",
         data: stockData.yArray,
         type: "areaspline",
         threshold: null,
@@ -86,23 +85,6 @@ export default function Home() {
             },
           },
         },
-        //     fillColor: {
-        //       linearGradient: {
-        //         x1: 0,
-        //         y1: 0,
-        //         x2: 0,
-        //         y2: 1,
-        //       },
-        //       stops: [
-        //         [0, Highcharts.getOptions().colors[0]],
-        //         [
-        //           1,
-        //           Highcharts.color(Highcharts.getOptions().colors[0])
-        //             .setOpacity(0)
-        //             .get("rgba"),
-        //         ],
-        //       ],
-        //     },
       },
     ],
     chart: {
@@ -119,7 +101,7 @@ export default function Home() {
   };
   // ================================= HIGHCHART - FOREX =========================
 
-  const options2 = {
+  const optionsForex = {
     // title: {
     //   text: `${forexData.currencies.one} to ${forexData.currencies.two}`,
     // },
@@ -194,7 +176,7 @@ export default function Home() {
   };
   // ================================= HIGHCHART - CRYPTO =========================
 
-  const options3 = {
+  const optionsCrypto = {
     // title: {
     //   text: cryptoData.cryptoName,
     // },
@@ -268,7 +250,35 @@ export default function Home() {
     },
   };
 
-  // ====================================================================
+  // ================================= HIGHCHART - MODAL - STOCK ==================
+
+  const optionsModalStock = {
+    rangeSelector: {
+      selected: 1,
+    },
+
+    title: {
+      text: stockData.stockName,
+    },
+
+    series: [
+      {
+        name: "AAPL Stock Price",
+        data: stockData.yArray,
+        type: "areaspline",
+        threshold: null,
+        tooltip: {
+          valueDecimals: 2,
+        },
+      },
+    ],
+    // chart: {
+    //   width: 1000,
+    //   height: "60%",
+    // },
+  };
+
+  // ==============================================================================
 
   return (
     <Fragment>
@@ -286,7 +296,10 @@ export default function Home() {
           >
             {stockData != undefined ? (
               <div className="w-full h-full" onClick={() => setShowModal(true)}>
-                <HighchartsReact highcharts={Highcharts} options={options1} />
+                <HighchartsReact
+                  highcharts={Highcharts}
+                  options={optionsStock}
+                />
               </div>
             ) : null}
           </div>
@@ -296,7 +309,7 @@ export default function Home() {
           >
             {/* {forexData != undefined && ( */}
             <div className="w-full h-full" onClick={() => setShowModal(true)}>
-              <HighchartsReact highcharts={Highcharts} options={options2} />
+              <HighchartsReact highcharts={Highcharts} options={optionsForex} />
             </div>
             {/* )} */}
           </div>
@@ -306,13 +319,30 @@ export default function Home() {
           >
             {/* {cryptoData != undefined ? ( */}
             <div className="w-full h-full" onClick={() => setShowModal(true)}>
-              <HighchartsReact highcharts={Highcharts} options={options3} />
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={optionsCrypto}
+              />
             </div>
             {/* ) : null} */}
           </div>
         </div>
       </main>
-      <Modal isVisible={showModal} onClose={() => setShowModal(false)} />
+      <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
+        {/* <div className="flex w-full h-full shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue"> */}
+        <div
+          className="flex w-full h-full border-2 shadow-xl shadow-sky-800"
+          onClick={() => setShowModal(true)}
+        >
+          <HighchartsReact
+            highcharts={Highcharts}
+            constructorType={"stockChart"}
+            options={optionsModalStock}
+            containerProps={{ style: { width: "80vw" } }}
+          />
+        </div>
+        {/* </div> */}
+      </Modal>
     </Fragment>
   );
 }
