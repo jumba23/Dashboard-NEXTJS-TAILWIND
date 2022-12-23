@@ -27,6 +27,8 @@ const getApiData = async () => {
 // ============================= FILTER API DATA FOR CARDS - INDEX PAGE =================================================
 
 const filterStockIntraDay = (stock) => {
+  // FILTER FOR BASIC INDEX CARDS
+
   // get stock name
   console.log(stock);
   const stockName = stock["Meta Data"]["2. Symbol"];
@@ -68,6 +70,14 @@ const filterStockIntraDay = (stock) => {
     e = parseFloat(e["1. open"]);
     yArray.push(e);
   });
+
+  // FILTER FOR MODAL
+
+  // need another API fetch for more in dept view https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&outputsize=full&apikey=demo
+
+  // get all dates and times (current date & time format)
+
+  // convert those dates & times into milliseconds and into number values
 
   return { stockName, yArray };
 };
