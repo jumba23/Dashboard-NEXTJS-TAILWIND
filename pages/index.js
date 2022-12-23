@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { getApiData } from "../components/services/indexPageApi";
 import Head from "next/head";
-import Link from "next/link";
+// import Link from "next/link";
+import { Modal } from "../components/Modal";
 
 export default function Home() {
   const [stockData, setStockData] = useState({});
   // const [forexData, setForexData] = useState({});
   // const [cryptoData, setCryptoData] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     apiCall();
   }, []);
@@ -268,7 +271,7 @@ export default function Home() {
   // ====================================================================
 
   return (
-    <>
+    <Fragment>
       <Head>
         <title>Dashboard Next</title>
         <meta name="description" content="Finance App Dashboard" />
@@ -277,38 +280,39 @@ export default function Home() {
       </Head>
       <main className="w-full h-full bg-blue-500">
         <div className="flex h-full">
-          <Link
-            href={`/Explore/Stocks`}
+          <div
+            // href={`/Explore/Stocks`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
             {stockData != undefined ? (
-              <div className="w-full h-full">
+              <div className="w-full h-full" onClick={() => setShowModal(true)}>
                 <HighchartsReact highcharts={Highcharts} options={options1} />
               </div>
             ) : null}
-          </Link>
-          <Link
-            href={`/Explore/Forex`}
+          </div>
+          <div
+            // href={`/Explore/Forex`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
             {/* {forexData != undefined && ( */}
-            <div className="w-full h-full">
+            <div className="w-full h-full" onClick={() => setShowModal(true)}>
               <HighchartsReact highcharts={Highcharts} options={options2} />
             </div>
             {/* )} */}
-          </Link>
-          <Link
-            href={`/Explore/Crypto`}
+          </div>
+          <div
+            // href={`/Explore/Crypto`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
             {/* {cryptoData != undefined ? ( */}
-            <div className="w-full h-full">
+            <div className="w-full h-full" onClick={() => setShowModal(true)}>
               <HighchartsReact highcharts={Highcharts} options={options3} />
             </div>
             {/* ) : null} */}
-          </Link>
+          </div>
         </div>
       </main>
-    </>
+      <Modal isVisible={showModal} onClose={() => setShowModal(false)} />
+    </Fragment>
   );
 }
