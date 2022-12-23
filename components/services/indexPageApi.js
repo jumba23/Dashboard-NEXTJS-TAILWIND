@@ -4,7 +4,7 @@ const stock = `TIME_SERIES_INTRADAY&symbol=IBM&interval=30min&apikey=${NEXT_PUBL
 const forex = `FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=compact&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
 const crypto = `DIGITAL_CURRENCY_DAILY&symbol=BTC&market=CNY&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
 
-// ============================= FETCH APIs =================================================
+// ============================= FETCH INDEX PAGE - 3 CARDS - STOCK, FOREX, AND CRYPTO APIs =================================================
 
 const getApiData = async () => {
   const resStock = await fetch(`${baseURL}${stock}`);
@@ -13,17 +13,18 @@ const getApiData = async () => {
   // const rawForexData = await resForex.json();
   // const resCrypto = await fetch(`${baseURL}${crypto}`);
   // const rawCryptoData = await resCrypto.json();
-  const finalStockData = filterStockIntraDay(rawStockData);
+  const filteredStockData = filterStockIntraDay(rawStockData);
+  console.log(rawStockData);
   // const finalForexData = filterForexDaily(rawForexData);
   // console.log(rawCryptoData);
   // const finalCryptoData = filterCryptoDaily(rawCryptoData);
 
   //   console.log(finalCryptoData);
 
-  return { finalStockData };
+  return { filteredStockData };
 };
 
-// ============================= FILTER API DATA =================================================
+// ============================= FILTER API DATA FOR CARDS - INDEX PAGE =================================================
 
 const filterStockIntraDay = (stock) => {
   // get stock name
