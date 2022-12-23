@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   const [stockData, setStockData] = useState({});
-  const [forexData, setForexData] = useState({});
+  // const [forexData, setForexData] = useState({});
   // const [cryptoData, setCryptoData] = useState({});
   useEffect(() => {
     apiCall();
@@ -16,13 +16,13 @@ export default function Home() {
   const apiCall = async () => {
     const res = await getApiData();
     console.log(res);
-    setForexData(res["finalForexData"]);
     setStockData(res["finalStockData"]);
+    // setForexData(res["finalForexData"]);
     // setCryptoData(res["finalCryptoData"]);
   };
 
   console.log(stockData);
-  console.log(forexData);
+  // console.log(forexData);
   // console.log(cryptoData);
 
   // console.log(typeof forexData != "undefined");
@@ -120,6 +120,9 @@ export default function Home() {
     // title: {
     //   text: `${forexData.currencies.one} to ${forexData.currencies.two}`,
     // },
+    title: {
+      text: "Forex",
+    },
     xAxis: {
       // max: 12,
       categories: [
@@ -157,8 +160,11 @@ export default function Home() {
     },
     series: [
       {
-        name: "Stocks",
-        data: forexData.yArray,
+        // data: forexData.yArray,
+        data: [
+          1.06094, 1.0588, 1.0625, 1.06812, 1.06317, 1.05355, 1.05281, 1.05542,
+          1.05048, 1.0466, 1.04902, 1.05341, 1.05258,
+        ],
         type: "areaspline",
         threshold: null,
         marker: {
@@ -189,6 +195,9 @@ export default function Home() {
     // title: {
     //   text: cryptoData.cryptoName,
     // },
+    title: {
+      text: "Crypto",
+    },
     xAxis: {
       // max: 12,
       categories: [
@@ -227,6 +236,10 @@ export default function Home() {
     series: [
       {
         // data: cryptoData.yArray,
+        data: [
+          16438.88, 16739, 16777.54, 16631.5, 17356.96, 17804.01, 17775.82,
+          17208.93, 17085.05, 17127.49, 17128.56, 17224.14, 16836.64, 17088.96,
+        ],
         type: "areaspline",
         threshold: null,
         marker: {
@@ -268,31 +281,31 @@ export default function Home() {
             href={`/Explore/Stocks`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
-            {stockData && (
+            {stockData != undefined ? (
               <div className="w-full h-full">
                 <HighchartsReact highcharts={Highcharts} options={options1} />
               </div>
-            )}
+            ) : null}
           </Link>
           <Link
             href={`/Explore/Forex`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
-            {forexData && (
-              <div className="w-full h-full">
-                <HighchartsReact highcharts={Highcharts} options={options2} />
-              </div>
-            )}
+            {/* {forexData != undefined && ( */}
+            <div className="w-full h-full">
+              <HighchartsReact highcharts={Highcharts} options={options2} />
+            </div>
+            {/* )} */}
           </Link>
           <Link
             href={`/Explore/Crypto`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
-            {/* {cryptoData && ( */}
+            {/* {cryptoData != undefined ? ( */}
             <div className="w-full h-full">
               <HighchartsReact highcharts={Highcharts} options={options3} />
             </div>
-            {/* )} */}
+            {/* ) : null} */}
           </Link>
         </div>
       </main>
