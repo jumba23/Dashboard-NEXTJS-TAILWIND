@@ -1,30 +1,46 @@
 import React, { Fragment, useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
-import { getApiData } from "../components/services/indexPageApi";
+import {
+  getIndexCardsApiData,
+  getHistoricalModalData,
+} from "../components/services/indexPageApi";
 import Head from "next/head";
 // import Link from "next/link";
 import { Modal } from "../components/Modal";
 
 export default function Home() {
-  const [stockData, setStockData] = useState({});
+  const [stockCardData, setStockCardData] = useState({});
+  const [stockModalData, setStockModalData] = useState({});
   // const [forexData, setForexData] = useState({});
   // const [cryptoData, setCryptoData] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     apiCall();
-  }, []);
+  }, [showModal]);
 
   const apiCall = async () => {
-    const res = await getApiData();
-    // console.log(res);
-    setStockData(res["filteredStockData"]);
-    // setForexData(res["finalForexData"]);
-    // setCryptoData(res["finalCryptoData"]);
+    console.log(!showModal);
+    console.log(showModal);
+    if (!showModal) {
+      const res = await getIndexCardsApiData();
+      // console.log(res);
+      setStockCardData(res["filteredStockCardData"]);
+      // setForexData(res["finalForexData"]);
+      // setCryptoData(res["finalCryptoData"]);
+    } else {
+      console.log("modal requested");
+      const res = await getHistoricalModalData();
+      setStockModalData(res["filteredStockModalData"]);
+    }
   };
 
-  console.log(stockData);
+  const handleClick = () => {
+    setShowModal(true);
+  };
+
+  // console.log(stockCardData);
   // console.log(forexData);
   // console.log(cryptoData);
 
@@ -544,7 +560,7 @@ export default function Home() {
 
   const optionsStock = {
     title: {
-      text: `Stocks (${stockData.stockName})`,
+      text: `Stock (${stockCardData.stockName})`,
     },
     xAxis: {
       // max: 12,
@@ -583,7 +599,7 @@ export default function Home() {
     },
     series: [
       {
-        data: stockData.yArray,
+        data: stockCardData.yArray,
         type: "areaspline",
         threshold: null,
         marker: {
@@ -767,13 +783,13 @@ export default function Home() {
     },
 
     title: {
-      text: stockData.stockName,
+      text: stockCardData.stockName,
     },
 
     series: [
       {
         name: "AAPL Stock Price",
-        data: mockData,
+        data: stockModalData,
         type: "areaspline",
         threshold: null,
         tooltip: {
@@ -803,7 +819,7 @@ export default function Home() {
             // href={`/Explore/Stocks`}
             className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
           >
-            {stockData != undefined ? (
+            {stockCardData != undefined ? (
               <div className="w-full h-full" onClick={() => setShowModal(true)}>
                 <HighchartsReact
                   highcharts={Highcharts}
@@ -841,7 +857,7 @@ export default function Home() {
         {/* <div className="flex w-full h-full shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue"> */}
         <div
           className="flex w-full h-full border-2 shadow-xl shadow-sky-800"
-          onClick={() => setShowModal(true)}
+          onClick={handleClick}
         >
           <HighchartsReact
             highcharts={Highcharts}

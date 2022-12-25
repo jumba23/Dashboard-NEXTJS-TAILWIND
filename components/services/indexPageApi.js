@@ -1,27 +1,44 @@
 const baseURL = "https://www.alphavantage.co/query?function=";
 const NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
-const stock = `TIME_SERIES_INTRADAY&symbol=IBM&interval=30min&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
-const forex = `FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=compact&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
-const crypto = `DIGITAL_CURRENCY_DAILY&symbol=BTC&market=CNY&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
+const stockIntaDay = `TIME_SERIES_INTRADAY&symbol=IBM&interval=30min&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
+const forexDailyEuUs = `FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=compact&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
+const cryptoDailyBitcoin = `DIGITAL_CURRENCY_DAILY&symbol=BTC&market=CNY&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
+const stockDailyHistory = `TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&outputsize=full&apikey=${NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`;
 
 // ============================= FETCH INDEX PAGE - 3 CARDS - STOCK, FOREX, AND CRYPTO APIs =================================================
 
-const getApiData = async () => {
-  const resStock = await fetch(`${baseURL}${stock}`);
+const getIndexCardsApiData = async () => {
+  const resStock = await fetch(`${baseURL}${stockIntaDay}`);
   const rawStockData = await resStock.json();
-  // const resForex = await fetch(`${baseURL}${forex}`);
+  // const resForex = await fetch(`${baseURL}${forexDailyEuUs}`);
   // const rawForexData = await resForex.json();
-  // const resCrypto = await fetch(`${baseURL}${crypto}`);
+  // const resCrypto = await fetch(`${baseURL}${cryptoDailyBitcoin}`);
   // const rawCryptoData = await resCrypto.json();
-  const filteredStockData = filterStockIntraDay(rawStockData);
-  console.log(rawStockData);
+  const filteredStockCardData = filterStockIntraDay(rawStockData);
+  // console.log(rawStockData);
   // const finalForexData = filterForexDaily(rawForexData);
   // console.log(rawCryptoData);
   // const finalCryptoData = filterCryptoDaily(rawCryptoData);
 
   //   console.log(finalCryptoData);
 
-  return { filteredStockData };
+  return { filteredStockCardData };
+};
+
+// ============================= FETCH MODAL - INDEX PAGE =================================================
+
+const getHistoricalModalData = async () => {
+  const resStock = await fetch(`${baseURL}${stockDailyHistory}`);
+  const rawStockData = await resStock.json();
+  console.log(rawStockData);
+  const filteredStockModalData = filterStockDailyHistory(rawStockData);
+  // const finalForexData = filterForexDaily(rawForexData);
+  // console.log(rawCryptoData);
+  // const finalCryptoData = filterCryptoDaily(rawCryptoData);
+
+  //   console.log(finalCryptoData);
+
+  return { filteredStockModalData };
 };
 
 // ============================= FILTER API DATA FOR CARDS - INDEX PAGE =================================================
@@ -53,15 +70,18 @@ const filterStockIntraDay = (stock) => {
   });
 
   //check for the final arrays length
-  let finalArrayLength;
+  let finalHistoricalDataArrayLength;
   if (entriesCounter > 14) {
-    finalArrayLength = 14;
+    finalHistoricalDataArrayLength = 14;
   } else {
-    finalArrayLength = entriesCounter;
+    finalHistoricalDataArrayLength = entriesCounter;
   }
 
   // create a new array with the length using the step above (how many data points for most recent day)
-  const onlyMostRecentValues = allValues.slice(0, finalArrayLength);
+  const onlyMostRecentValues = allValues.slice(
+    0,
+    finalHistoricalDataArrayLength
+  );
 
   // get the final array
   const yArray = [];
@@ -128,4 +148,19 @@ const filterStockIntraDay = (stock) => {
 //   return { cryptoName, yArray };
 // };
 
-export { getApiData };
+const filterStockDailyHistory = (data) => {
+  const finalHistoricalDataArray = [];
+  for (let entry in data["Time Series (Daily)"]) {
+    let tempArray = [];
+    // console.log(data["Time Series (Daily)"][entry]["1. open"]);
+    // console.log(entry);
+
+    let date = new Date(entry).getTime();
+    tempArray.push(date);
+    tempArray.push(parseFloat(data["Time Series (Daily)"][entry]["1. open"]));
+    finalHistoricalDataArray.push(tempArray);
+  }
+  console.log(finalHistoricalDataArray);
+  return finalHistoricalDataArray;
+};
+export { getIndexCardsApiData, getHistoricalModalData };
