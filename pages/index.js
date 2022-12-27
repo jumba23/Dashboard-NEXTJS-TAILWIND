@@ -789,7 +789,7 @@ export default function Home() {
     series: [
       {
         name: "AAPL Stock Price",
-        data: stockModalData,
+        data: mockData,
         type: "areaspline",
         threshold: null,
         tooltip: {

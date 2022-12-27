@@ -150,16 +150,16 @@ const filterStockIntraDay = (stock) => {
 
 const filterStockDailyHistory = (data) => {
   const finalHistoricalDataArray = [];
-  for (let entry in data["Time Series (Daily)"]) {
-    let tempArray = [];
-    // console.log(data["Time Series (Daily)"][entry]["1. open"]);
-    // console.log(entry);
+  // for (let entry in data["Time Series (Daily)"]) {
+  //   let tempArray = [];
+  //   // console.log(data["Time Series (Daily)"][entry]["1. open"]);
+  //   // console.log(entry);
 
-    let date = new Date(entry).getTime();
-    tempArray.push(date);
-    tempArray.push(parseFloat(data["Time Series (Daily)"][entry]["1. open"]));
-    finalHistoricalDataArray.push(tempArray);
-  }
+  //   let date = new Date(entry).getTime();
+  //   tempArray.push(date);
+  //   tempArray.push(parseFloat(data["Time Series (Daily)"][entry]["1. open"]));
+  //   finalHistoricalDataArray.push(tempArray);
+  // }
   console.log(finalHistoricalDataArray);
   return finalHistoricalDataArray;
 };
