@@ -11,28 +11,25 @@ import { Modal } from "../components/Modal";
 
 export default function Home() {
   const [stockCardData, setStockCardData] = useState({});
-  const [stockModalData, setStockModalData] = useState({});
+  const [stockModalData, setStockModalData] = useState([]);
   // const [forexData, setForexData] = useState({});
   // const [cryptoData, setCryptoData] = useState({});
   const [showModal, setShowModal] = useState(false);
+  console.log("stock modal data", stockModalData);
 
   useEffect(() => {
     apiCall();
   }, [showModal]);
 
   const apiCall = async () => {
-    console.log(!showModal);
-    console.log(showModal);
     if (!showModal) {
       const res = await getIndexCardsApiData();
-      // console.log(res);
       setStockCardData(res["filteredStockCardData"]);
       // setForexData(res["finalForexData"]);
       // setCryptoData(res["finalCryptoData"]);
     } else {
-      console.log("modal requested");
       const res = await getHistoricalModalData();
-      setStockModalData(res["filteredStockModalData"]);
+      setStockModalData(res["filteredStockModalData"].reverse());
     }
   };
 
@@ -781,15 +778,21 @@ export default function Home() {
     rangeSelector: {
       selected: 1,
     },
+    // xAxis: {
+    //   type: "category",
+    //   categories: stockModalData.map((data) => data[0]),
+    //   labels: {
+    //     align: "center",
+    //   },
+    // },
 
     title: {
-      text: stockCardData.stockName,
+      text: "IBM",
     },
 
     series: [
       {
-        name: "AAPL Stock Price",
-        data: mockData,
+        data: stockModalData,
         type: "areaspline",
         threshold: null,
         tooltip: {
@@ -854,7 +857,6 @@ export default function Home() {
         </div>
       </main>
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-        {/* <div className="flex w-full h-full shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue"> */}
         <div
           className="flex w-full h-full border-2 shadow-xl shadow-sky-800"
           onClick={handleClick}
@@ -866,7 +868,6 @@ export default function Home() {
             containerProps={{ style: { width: "80vw" } }}
           />
         </div>
-        {/* </div> */}
       </Modal>
     </Fragment>
   );
