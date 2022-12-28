@@ -3,7 +3,9 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
 import {
   getIndexCardsApiData,
-  getHistoricalModalData,
+  getHistoricalStockModalData,
+  getHistoricalForexModalData,
+  getHistoricalCryptoModalData,
 } from "../components/services/indexPageApi";
 import Head from "next/head";
 // import Link from "next/link";
@@ -12,10 +14,12 @@ import { Modal } from "../components/Modal";
 export default function Home() {
   const [stockCardData, setStockCardData] = useState({});
   const [stockModalData, setStockModalData] = useState([]);
+  const [forexModalData, setForexModalData] = useState([]);
+  const [cryptoModalData, setCryptoModalData] = useState([]);
   // const [forexData, setForexData] = useState({});
   // const [cryptoData, setCryptoData] = useState({});
   const [showModal, setShowModal] = useState(false);
-  console.log("stock modal data", stockModalData);
+  const [modalCategory, setModalCategory] = useState(false);
 
   useEffect(() => {
     apiCall();
@@ -28,12 +32,22 @@ export default function Home() {
       // setForexData(res["finalForexData"]);
       // setCryptoData(res["finalCryptoData"]);
     } else {
-      const res = await getHistoricalModalData();
-      setStockModalData(res["filteredStockModalData"].reverse());
+      switch (modalCategory) {
+        case "stock":
+          const res1 = await getHistoricalStockModalData();
+          setStockModalData(res1["filteredStockModalData"].reverse());
+        case "forex":
+          const res2 = await getHistoricalForexModalData();
+          setForexModalData(res2["filteredForexModalData"].reverse());
+        // case "crypto":
+        //   const res3 = await getHistoricalCryptoModalData();
+        //   setStockModalData(res3["filteredCryptoModalData"].reverse());
+      }
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    setModalCategory(e.currentTarget.id);
     setShowModal(true);
   };
 
@@ -557,7 +571,7 @@ export default function Home() {
 
   const optionsStock = {
     title: {
-      text: `Stock (${stockCardData.stockName})`,
+      text: `Stocks (${stockCardData.stockName})`,
     },
     xAxis: {
       // max: 12,
@@ -787,7 +801,7 @@ export default function Home() {
     // },
 
     title: {
-      text: "IBM",
+      text: stockCardData.stockName,
     },
 
     series: [
@@ -818,12 +832,15 @@ export default function Home() {
       </Head>
       <main className="w-full h-full bg-blue-500">
         <div className="flex h-full">
-          <div
-            // href={`/Explore/Stocks`}
-            className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
-          >
+          <div className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
             {stockCardData != undefined ? (
-              <div className="w-full h-full" onClick={() => setShowModal(true)}>
+              <div
+                className="w-full h-full"
+                id="stock"
+                name="stock"
+                value="stock"
+                onClick={handleClick}
+              >
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={optionsStock}
@@ -831,35 +848,37 @@ export default function Home() {
               </div>
             ) : null}
           </div>
-          <div
-            // href={`/Explore/Forex`}
-            className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
-          >
-            {/* {forexData != undefined && ( */}
-            <div className="w-full h-full" onClick={() => setShowModal(true)}>
+          <div className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+            <div
+              className="w-full h-full"
+              id="forex"
+              name="forex"
+              value="forex"
+              onClick={handleClick}
+            >
               <HighchartsReact highcharts={Highcharts} options={optionsForex} />
             </div>
-            {/* )} */}
           </div>
-          <div
-            // href={`/Explore/Crypto`}
-            className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105"
-          >
-            {/* {cryptoData != undefined ? ( */}
-            <div className="w-full h-full" onClick={() => setShowModal(true)}>
+          <div className="flex w-1/3 m-5 transition duration-500 transform border-2 shadow-xl shadow-sky-800 card bg-reallyLightBabyBlue hover:cursor-pointer hover:scale-105">
+            <div
+              className="w-full h-full"
+              id="crypto"
+              name="crypto"
+              value="crypto"
+              onClick={handleClick}
+            >
               <HighchartsReact
                 highcharts={Highcharts}
                 options={optionsCrypto}
               />
             </div>
-            {/* ) : null} */}
           </div>
         </div>
       </main>
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
         <div
           className="flex w-full h-full border-2 shadow-xl shadow-sky-800"
-          onClick={handleClick}
+          onClick={() => setShowModal(true)}
         >
           <HighchartsReact
             highcharts={Highcharts}
