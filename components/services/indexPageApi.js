@@ -286,6 +286,7 @@ const filterStockDailyHistory = (data) => {
 };
 const filterForexDailyHistory = (data) => {
   let counter = 0;
+  console.log("raw forex data", data);
 
   const finalHistoricalForexDataArray = [];
   for (let entry in data["Time Series FX (Daily)"]) {
@@ -301,6 +302,7 @@ const filterForexDailyHistory = (data) => {
       finalHistoricalForexDataArray.push(tempArray);
     }
   }
+  console.log(finalHistoricalForexDataArray);
 
   return finalHistoricalForexDataArray;
 };

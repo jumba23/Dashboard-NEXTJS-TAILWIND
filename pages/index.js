@@ -51,6 +51,16 @@ export default function Home() {
     setShowModal(true);
   };
 
+  const modalSeriesData = () => {
+    switch (modalCategory) {
+      case "stock":
+        return stockModalData;
+      case "forex":
+        return forexModalData;
+      case "crypto":
+        return cryptoModalData;
+    }
+  };
   // console.log(stockCardData);
   // console.log(forexData);
   // console.log(cryptoData);
@@ -786,7 +796,7 @@ export default function Home() {
     },
   };
 
-  // ================================= HIGHCHART - MODAL - STOCK ==================
+  // ================================= HIGHCHART - MODAL ==================
 
   const optionsModalStock = {
     rangeSelector: {
@@ -801,12 +811,13 @@ export default function Home() {
     // },
 
     title: {
-      text: stockCardData.stockName,
+      text: modalCategory,
     },
 
     series: [
       {
-        data: stockModalData,
+        data: modalSeriesData(),
+
         type: "areaspline",
         threshold: null,
         tooltip: {
